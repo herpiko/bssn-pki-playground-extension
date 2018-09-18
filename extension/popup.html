@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <title>BSSN PKI Playground</title>
+  </head>
+  <style>
+    body {
+      width:400px;
+    }
+    .title {
+      margin:0px;
+      margin-bottom:5px;
+      color:orange;
+      text-align:center;
+    }
+    .hide {
+      display:none !important;
+    }
+  </style>
+  <body>
+    <h4 class="title">BSSN PKI Playground</h4>
+    <div id="set-masterpass" class="hide">
+      <span>You need to setup a masterpass</span>
+      <br/>
+      <input placeholder="type your masterpass" type="password" id="masterpass"/>
+      <br/>
+      <input placeholder="repeat your masterpass" type="password" id="masterpass-repeat"/>
+      <br/>
+      <button id="set-masterpass-ok">OK</button>
+    </div>
+    <div id="keystore" class="hide">
+      Keystore
+      <hr/>
+      <button id="reset">Reset</button>
+    </div>
+    <div id="csr-request" class="hide">
+      CSR Request
+      <hr/>
+	  <span id="csr-data"></span>
+      <hr/>
+      <button id="reset">Generate keypair and create CSR</button>
+    </div>
+    <!--input type="file" id="files" name="files[]" multiple /-->
+    <script src="popup.js"></script>
+  </body>
+</html>

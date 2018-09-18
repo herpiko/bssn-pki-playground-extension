@@ -1,0 +1,20 @@
+{
+  "name": "bssn-pki-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "background.js",
+  "scripts": {
+    "build-popup": "./node_modules/.bin/browserify src/popup.js -o extension/popup.js",
+    "build-content": "./node_modules/.bin/browserify src/content.js -o extension/content.js",
+    "build-background": "./node_modules/.bin/browserify src/background.js -o extension/background.js",
+    "pack" : "google-chrome-stable --pack-extension=extension/ --pack-extension-key=extension.pem",
+    "build" : "npm run build-popup && npm run build-content && npm run build-background && npm run pack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Herpiko Dwi Aguno <herpiko@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^16.2.2",
+    "twin-bcrypt": "^2.1.1"
+  }
+}
