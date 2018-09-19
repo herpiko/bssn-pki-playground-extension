@@ -1,4 +1,5 @@
-var TwinBcrypt = window.TwinBcrypt = require('twin-bcrypt');
+var pki = require('../forge/pki.js');
+
 function loadStore(cb){
   chrome.storage.sync.get(function(objs){
     var keys = Object.keys(objs);
@@ -22,34 +23,12 @@ function loadStore(cb){
         var element = document.getElementById("keystore");
         element.classList.remove("hide");
 	  }
-    } else {
-      var element = document.getElementById("set-masterpass");
-      element.classList.remove("hide");
     } 
   });
 }
 
-function initiateMasterpass() {
-  var pass = document.getElementById("masterpass").value;
-  var passRepeat = document.getElementById("masterpass-repeat").value;
-  if (!pass || (pass && pass.length < 1)) {
-    alert('Masterpass should not be empty');
-    return;
-  }
-  if (pass != passRepeat) {
-    alert('Please repeat the same masterpass');
-    return;
-  }
-  var obj = {}
-  obj['masterpass'] = TwinBcrypt.hashSync(pass);
-  chrome.storage.sync.set(obj, function(){
-    alert('Masterpass has been successfuly setup.');
-    window.close();
-  });
-}
-
 function reset() {
-  if (!window.confirm('You are going to reset your masterpass and all of your keystore. Are you sure?')) {
+  if (!window.confirm('You are going to reset the extension data. Are you sure?')) {
     return;
   }
   chrome.storage.sync.get(function(objs){
@@ -61,6 +40,26 @@ function reset() {
   });
 }
 
-document.getElementById("set-masterpass-ok").addEventListener("click", initiateMasterpass);
+function createCSR() {
+  var password = document.getElementById("csr-challenge-password").value;
+  if (!password || (password && password.length < 1)) {
+    alert('Challenge password is required');
+    return;
+  }
+  var keys = forge.pki.rsa.generateKeyPair(2048);
+  chrome.storage.sync.get('current-csr', function(data){
+    console.log(data);
+    var csr = pki.createCSR(keys, data['current-csr'], password);
+    var pem = forge.pki.certificationRequestToPem(csr);
+    console.log(pem);
+    var element = document.getElementById("csr-pem");
+    element.innerHTML = '<hr><div>Privatekey stored in P12 using challenge pass.<br><br>CSR pem :<br>' + pem + '</div>';
+    //element = document.getElementById("create-csr");
+    //element.classList.add("hide");
+  });
+
+}
+
 document.getElementById("reset").addEventListener("click", reset);
+document.getElementById("create-csr").addEventListener("click", createCSR);
 loadStore();

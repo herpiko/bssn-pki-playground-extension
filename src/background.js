@@ -31,30 +31,14 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender, sendRespo
     sendResponse(false);
     return;
   }
-  chrome.storage.sync.get(function(objs){
-    var keys = Object.keys(objs);
-    var initialized = false;
-    for (var i in keys) {
-      if (keys[i] === 'masterpass') {
-        initialized = true;
-        break;
-      }
-    }
-    if (!initialized) {
-      console.log('masterpass is not initalized yet');
-      alert('Masterpass has not been initialized yet');
-      sendResponse(false);
-      return;
-    }
-    // Remove existing key value
-    chrome.storage.sync.remove('current-csr', function(){
-      var obj = {}
-      obj['current-csr'] = request.data;
-      chrome.storage.sync.set(obj, function(){
-        console.log('csr-request saved');
-        alert('CSR attribute data has been saved, please click BSSN PKI Playground extension icon to continue.');
-        sendResponse(true);
-      });
+  // Remove existing key value
+  chrome.storage.sync.remove('current-csr', function(){
+    var obj = {}
+    obj['current-csr'] = request.record;
+    chrome.storage.sync.set(obj, function(){
+      console.log('csr-request saved');
+      alert('CSR attribute data has been saved, please click BSSN PKI Playground extension icon to continue.');
+      sendResponse(true);
     });
   });
 });
