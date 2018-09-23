@@ -19,22 +19,40 @@
   </style>
   <body>
     <h4 class="title">BSSN PKI Playground</h4>
-    <div id="keystore" class="hide">
-      Keystore
-      <hr/>
-      <button id="reset">Reset</button>
-    </div>
+
     <div id="csr-request" class="hide">
       CSR Request
       <hr/>
-      <span id="csr-data"></span>
-      <hr/>
-      <input type="password" placeholder="Challenge password" id="csr-challenge-password"/>
-      <button id="create-csr">Generate keypair and create CSR</button>
+	  <div id="csr-request-form">
+        <span id="csr-data"></span>
+        <hr/>
+	    BSSNAPI cred<br>
+        Username : <input><br>
+        Password : <input><br>
+        <hr/>
+        Challenge passphrase <input type="password" placeholder="Challenge password" id="csr-challenge-passphrase"/><br>
+        <button id="create-csr">Generate keypair and create CSR</button>
+	  </div>
 	  <span id="csr-pem"></span>
       <hr/>
     </div>
-    <!--input type="file" id="files" name="files[]" multiple /-->
+
+    <div id="certificate-request" class="hide">
+      Certificate Request
+      <hr/>
+	  BSSN API cred<br>
+      Username : <input><br>
+      Password : <input><br>
+	  <hr>
+      Private key (PKCS8 PEM) : <input type="file" id="pkcs8-file-input"><br>
+      or paste PEM string here : <br><textarea id="pkcs8-string-input" style="width:300px;height:200px;"></textarea><br>
+      Private key passphrase <input type="password" placeholder="PKCS8 passphrase" id="pkcs8-passphrase"/><br>
+      <hr/>
+      P12 Passphrase <input type="password" placeholder="P12 passphrase" id="p12-challenge-passphrase"/><br>
+      <button id="create-p12">Download cert and pack it with privkey to P12</button>
+      <hr/>
+    </div>
+
     <script src="popup.js"></script>
   </body>
 </html>
