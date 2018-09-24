@@ -14,9 +14,12 @@
   "author": "Herpiko Dwi Aguno <herpiko@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "aes256": "^1.0.4",
+    "axios": "^0.18.0",
     "browserify": "^16.2.2",
     "downloadjs": "^1.4.7",
     "fetch": "^1.1.0",
+    "hex-to-array-buffer": "^1.1.0",
     "node-forge": "^0.7.6",
     "qs": "^6.5.2"
   }
