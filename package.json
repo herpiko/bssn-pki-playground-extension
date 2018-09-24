@@ -17,6 +17,7 @@
     "browserify": "^16.2.2",
     "downloadjs": "^1.4.7",
     "fetch": "^1.1.0",
-    "node-forge": "^0.7.6"
+    "node-forge": "^0.7.6",
+    "qs": "^6.5.2"
   }
 }
