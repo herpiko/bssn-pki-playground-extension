@@ -1,0 +1,26 @@
+{
+  "manifest_version": 1,
+  "name": "BSSN PKI Playground",
+  "description": "PKI Playground",
+  "version": "0.1",
+
+  "browser_action": {
+   "default_icon": "icon.png",
+   "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts" : [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:3000/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
