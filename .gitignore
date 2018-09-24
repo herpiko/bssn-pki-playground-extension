@@ -1,2 +1,4 @@
 node_modules
 extension/*.js
+extension.crx
+extension.pem
